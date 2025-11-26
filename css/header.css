@@ -1,0 +1,90 @@
+.siteHeader {
+  width: min(1250px, 100%);
+  margin: 0 auto 48px;
+}
+
+.siteNav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 12px 0;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-color);
+}
+
+.brand__logo {
+  font-size: 1.9rem;
+}
+
+.brand__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.brand__title {
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.brand__eyebrow {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.navLinks {
+  display: flex;
+  gap: 22px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.navLinks a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-weight: 600;
+  position: relative;
+}
+
+.navLinks a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 2px;
+  background: var(--primary);
+  opacity: 0;
+  transform: scaleX(0.6);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.navLinks a:hover::after,
+.navLinks a[aria-current="page"]::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+.navCTA {
+  padding-inline: 20px;
+}
+
+@media (max-width: 720px) {
+  .siteNav {
+    flex-direction: column;
+  }
+
+  .navLinks {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}

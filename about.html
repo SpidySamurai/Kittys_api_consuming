@@ -4,28 +4,15 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
     <title>About · Kittys API</title>
   </head>
   <body>
-    <header class="siteHeader">
-      <nav class="siteNav" aria-label="Primary">
-        <a class="brand" href="https://javierchiortiz.dev" target="_blank" rel="noopener noreferrer">
-          <span class="brand__logo" aria-hidden="true">😺</span>
-          <span class="brand__text">
-            <span class="brand__title">JavierChi.dev</span>
-            <span class="brand__eyebrow">Cat Console</span>
-          </span>
-        </a>
-        <ul class="navLinks">
-          <li><a href="./index.html">Home</a></li>
-          <li><a aria-current="page" href="about.html">About</a></li>
-          <li><a href="https://thecatapi.com/" target="_blank" rel="noopener noreferrer">API</a></li>
-        </ul>
-      </nav>
-    </header>
+    <div data-fragment="header.html"></div>
 
-    <main>
+    <main role="main">
       <section class="about">
         <div class="about__content">
           <p class="about__eyebrow">Powered by TheCatAPI</p>
@@ -69,8 +56,8 @@
       </section>
     </main>
 
-    <footer class="siteFooter">
-      <p>Built with ☕ and real APIs · 2025</p>
-    </footer>
+    <div data-fragment="footer.html"></div>
+
+    <script src="js/main.js" defer></script>
   </body>
 </html>
