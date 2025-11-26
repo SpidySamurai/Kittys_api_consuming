@@ -8,29 +8,55 @@
     <title>Random cats</title>
   </head>
   <body>
-    <h1>API CONSUME BASICS</h1>
-    <section class="uploadingCats">
-      <h2>Upload a cat photo</h2>
+    <header class="siteHeader">
+      <nav class="siteNav" aria-label="Primary">
+        <a class="brand" href="https://javierchiortiz.dev" target="_blank" rel="noopener noreferrer">
+          <span class="brand__logo" aria-hidden="true">😺</span>
+          <span class="brand__text">
+            <span class="brand__title">JavierChi.dev</span>
+            <span class="brand__eyebrow">Cat Console</span>
+          </span>
+        </a>
+        <ul class="navLinks">
+          <li><a href="./index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="https://thecatapi.com/" target="_blank" rel="noopener noreferrer">API</a></li>
+        </ul>
+      </nav>
+    </header>
 
-      <form class="uploadingForm">
-        <input id="file" type="file" name="file" />
-        <button type="button" onClick="uploadCat()">
-          Subir foto de un Gatito
-        </button>
-      </form>
-    </section>
-    <span id="error"> </span>
-    <button onClick="loadRandomCats()">Refresh random cats</button>
+    <main>
+      <section class="randomCats" id="randomCats">
+        <div class="sectionHeading">
+          <h2>Random cats</h2>
+          <button onClick="loadRandomCats()">Refresh random cats</button>
+        </div>
+        <div class="randomCats__cards"></div>
+      </section>
 
-    <section class="randomCats" id="randomCats">
-      <h2>Random cats</h2>
-      <div class="randomCats__cards"></div>
-    </section>
+      <section class="favouriteCats" id="favouriteCats">
+        <div class="sectionHeading">
+          <h2>Favorite cats</h2>
+        </div>
+        <div class="favouriteCats__cards"></div>
+      </section>
 
-    <section class="favouriteCats">
-      <h2>Favorite cats</h2>
-      <div class="favouriteCats__cards"></div>
-    </section>
+      <section class="uploadingCats" id="upload">
+        <h2>Upload a cat photo</h2>
+
+        <form class="uploadingForm">
+          <input id="file" type="file" name="file" />
+          <button type="button" onClick="uploadCat()">
+            Upload a cat photo
+          </button>
+        </form>
+      </section>
+      <span id="error" role="status" aria-live="polite"></span>
+    </main>
+
+    <footer class="siteFooter">
+      <p>Built with ☕ and real APIs · 2025</p>
+    </footer>
 
     <script src="./main.js"></script>
   </body>

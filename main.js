@@ -6,18 +6,25 @@ const error = document.getElementById("error");
 
 const createCatArticle = (cat, catImgUrl, onClickAction, onClickActionText) => {
   const catArticle = document.createElement("article");
+  catArticle.classList.add("catCard");
+
+  const catMedia = document.createElement("div");
+  catMedia.classList.add("catCard__media");
 
   const catImg = document.createElement("img");
   catImg.width = 350;
   catImg.src = catImgUrl;
   catImg.loading = "lazy";
+  catImg.alt = "Photo of a cat";
+
+  catMedia.appendChild(catImg);
 
   const catBtn = document.createElement("button");
   const btnText = document.createTextNode(onClickActionText);
   catBtn.onclick = () => onClickAction(cat.id);
   catBtn.appendChild(btnText);
 
-  catArticle.appendChild(catImg);
+  catArticle.appendChild(catMedia);
   catArticle.appendChild(catBtn);
 
   return catArticle;
@@ -25,7 +32,7 @@ const createCatArticle = (cat, catImgUrl, onClickAction, onClickActionText) => {
 
 const loadRandomCats = async () => {
   const response = await fetch(
-    `${CAT_API}images/search?limit=4&api_key${API_KEY}`
+    `${CAT_API}images/search?limit=4&api_key=${API_KEY}`
   );
   const data = await response.json();
 
@@ -43,7 +50,7 @@ const loadRandomCats = async () => {
       favouriteCats.appendChild(catArticle);
     });
   } else {
-    error.innerHTML = "Hubo un error en random " + response.status;
+    error.innerHTML = "There was an error loading random cats: " + response.status;
   }
 };
 
@@ -71,7 +78,7 @@ const loadFavouriteCats = async () => {
       favouriteCats.appendChild(catArticle);
     });
   } else {
-    error.innerHTML = "Hubo un error en favourites " + response.status;
+    error.innerHTML = "There was an error loading favorites: " + response.status;
   }
 };
 
@@ -86,9 +93,9 @@ const addCatToFav = async (id) => {
       image_id: id,
     }),
   });
-  console.log("Gato ingresado a favoritos");
+  console.log("Cat added to favorites");
   if (response.status !== 200) {
-    error.innerHTML = "Hubo un error en random " + response.status;
+    error.innerHTML = "There was an error saving to favorites: " + response.status;
   } else {
     loadFavouriteCats();
   }
@@ -101,9 +108,9 @@ const removeCatfromFav = async (id) => {
       "X-API-KEY": API_KEY,
     },
   });
-  console.log("Gato retirado de favoritos");
+  console.log("Cat removed from favorites");
   if (response.status !== 200) {
-    error.innerHTML = "Hubo un error en favourites " + response.status;
+    error.innerHTML = "There was an error removing from favorites: " + response.status;
   } else {
     loadFavouriteCats();
   }
