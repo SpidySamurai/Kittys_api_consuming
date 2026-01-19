@@ -1,0 +1,101 @@
+/* About Page / Section Styles */
+
+.about {
+  /* .about container styles are already in cards.css (shared with .card) */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  padding: 36px;
+}
+
+.about__eyebrow {
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.3em;
+  font-size: 0.78rem;
+  margin: 0 0 12px;
+}
+
+.about__content h2 {
+  margin-top: 0;
+  color: var(--text-main);
+}
+
+.about__copy {
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.about__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.about__link {
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--primary);
+  transition: color 0.2s;
+}
+
+.about__link:hover {
+  color: var(--primary-dark);
+}
+
+.about__list {
+  padding-left: 18px;
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+.about__panel {
+  background: rgba(103, 84, 248, 0.08); /* Keep this or use var(--primary-light) with low opacity? Keeping original feel */
+  border-radius: 24px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  box-shadow: inset 0 0 0 1px rgba(103, 84, 248, 0.18);
+}
+
+.about__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 14px;
+}
+
+.about__stats article {
+  background: rgba(103, 84, 248, 0.12);
+  border-radius: 18px;
+  padding: 16px;
+  text-align: center;
+  box-shadow: inset 0 0 0 1px rgba(103, 84, 248, 0.22);
+}
+
+.about__stats h3 {
+  margin: 0 0 6px;
+  font-size: 1.2rem;
+  color: var(--text-main);
+}
+
+.about__stats p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.about__details h3 {
+  margin: 0;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--primary-dark);
+}
+
+.about__details p {
+  margin: 0 0 12px;
+  color: var(--text-main);
+}

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="css/vars.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/components/buttons.css" />
+    <link rel="stylesheet" href="css/components/cards.css" />
+    <link rel="stylesheet" href="css/components/forms.css" />
+    <link rel="stylesheet" href="css/pages/breeds.css" />
+    <link rel="stylesheet" href="css/header.css" />
+    <link rel="stylesheet" href="css/footer.css" />
+    <title>Breeds · Kittys API</title>
+</head>
+
+<body>
+    <div data-fragment="header.html"></div>
+
+    <main role="main">
+        <section class="breeds" id="breedsContainer">
+            <div class="sectionHeading">
+                <h2>Cat Dictionary</h2>
+            </div>
+
+            <div class="breeds__controls">
+                <label for="breedSelector">Select a breed to learn more:</label>
+                <select id="breedSelector" class="breedSelect">
+                    <option value="">Select a breed...</option>
+                </select>
+            </div>
+
+            <article id="breedDetail" class="breedDetail" hidden>
+                <div class="breedDetail__media">
+                    <img id="breedImage" src="" alt="Breed representation" />
+                </div>
+                <div class="breedDetail__content">
+                    <h2 id="breedName">Breed Name</h2>
+                    <p id="breedDescription" class="breedDescription">Description goes here.</p>
+
+                    <div class="breedMeta">
+                        <span class="chip" id="breedOrigin">🇺🇸 Origin</span>
+                        <span class="chip" id="breedLifeSpan">❤️ 12-15 years</span>
+                    </div>
+
+                    <div class="breedStats" id="breedStats">
+                        <!-- Stats will be injected here -->
+                    </div>
+
+                    <div class="breedLinks">
+                        <a id="wikiLink" href="#" target="_blank" class="btn btn-small">Wikipedia</a>
+                    </div>
+                </div>
+            </article>
+
+            <div id="breedPlaceholder" class="emptyState">
+                <p>Choose a breed above to see its details and super powers!</p>
+            </div>
+        </section>
+    </main>
+
+    <div data-fragment="footer.html"></div>
+    <script src="js/main.js" defer></script>
+</body>
+
+</html>

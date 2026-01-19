@@ -1,47 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/header.css" />
-    <link rel="stylesheet" href="css/footer.css" />
-    <title>Random cats</title>
-  </head>
-  <body>
-    <div data-fragment="header.html"></div>
 
-    <main role="main">
-      <section class="randomCats" id="randomCats">
-        <div class="sectionHeading">
-          <h2>Random cats</h2>
-          <button type="button" data-action="refresh-random">Refresh random cats</button>
-        </div>
-        <div class="randomCats__cards"></div>
-      </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/vars.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components/buttons.css" />
+  <link rel="stylesheet" href="css/components/cards.css" />
+  <link rel="stylesheet" href="css/components/forms.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <title>Random cats</title>
+</head>
 
-      <section class="favouriteCats" id="favouriteCats">
-        <div class="sectionHeading">
-          <h2>Favorite cats</h2>
-        </div>
-        <div class="favouriteCats__cards"></div>
-      </section>
+<body>
+  <div data-fragment="header.html"></div>
 
-      <section class="uploadingCats" id="upload">
-        <h2>Upload a cat photo</h2>
+  <main role="main">
+    <section class="randomCats" id="randomCats">
+      <div class="sectionHeading">
+        <h2>Random cats</h2>
+        <button type="button" data-action="refresh-random">Refresh random cats</button>
+      </div>
+      <div class="randomCats__cards"></div>
+    </section>
 
-        <form class="uploadingForm" id="uploadCatForm">
-          <label for="catFile">Choose a cat photo to upload</label>
-          <input id="catFile" type="file" name="file" accept="image/*" />
-          <button type="submit">Upload a cat photo</button>
-        </form>
-      </section>
-      <span id="error" role="status" aria-live="polite"></span>
-    </main>
+    <section class="favouriteCats" id="favouriteCats">
+      <div class="sectionHeading">
+        <h2>Favorite cats</h2>
+      </div>
+      <div class="favouriteCats__cards"></div>
+    </section>
 
-    <div data-fragment="footer.html"></div>
+    <section class="uploadedCats" id="uploadedCats">
+      <div class="sectionHeading">
+        <h2>My Uploads</h2>
+      </div>
+      <div class="uploadedCats__cards"></div>
+    </section>
 
-    <script src="js/main.js" defer></script>
-  </body>
+    <section class="uploadingCats" id="upload">
+      <h2>Upload a cat photo</h2>
+
+      <form class="uploadingForm" id="uploadCatForm">
+        <label for="catFile">Choose a cat photo to upload</label>
+        <input id="catFile" type="file" name="file" accept="image/*" />
+        <button type="submit">Upload a cat photo</button>
+      </form>
+    </section>
+    <span id="error" role="status" aria-live="polite"></span>
+  </main>
+
+  <div data-fragment="footer.html"></div>
+
+  <script src="js/main.js" defer></script>
+</body>
+
 </html>

@@ -1,0 +1,59 @@
+:root {
+  /* Typography */
+  --font-family: "Inter", "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-code: "JetBrains Mono", "Fira Code", monospace;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-xxl: 64px;
+
+  /* Colors - Light Theme (Default) */
+  --primary: #6754f8;
+  --primary-dark: #4f3ed6;
+  --primary-light: #e0dfff;
+
+  --bg-body: #f8fbff;
+  --bg-surface: #ffffff;
+  --bg-surface-glass: rgba(255, 255, 255, 0.85);
+
+  --text-main: #1f2937;
+  --text-muted: #6b7280;
+  --text-inverse: #ffffff;
+
+  --border-color: rgba(15, 23, 42, 0.08);
+  --border-card: rgba(103, 84, 248, 0.15);
+
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md:
+    0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 24px 42px -28px rgba(15, 23, 42, 0.25);
+  --shadow-hover: 0 34px 52px -34px rgba(15, 23, 42, 0.45);
+
+  --accent-error: #f97316;
+  --accent-success: #10b981;
+}
+
+/* Dark Theme Overrides */
+[data-theme="dark"] {
+  --primary: #818cf8;
+  --primary-dark: #6366f1;
+  --primary-light: #312e81;
+
+  --bg-body: #0f172a;
+  --bg-surface: #1e293b;
+  --bg-surface-glass: rgba(30, 41, 59, 0.85);
+
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --text-inverse: #ffffff;
+
+  --border-color: rgba(255, 255, 255, 0.1);
+  --border-card: rgba(129, 140, 248, 0.2);
+
+  --shadow-lg: 0 24px 42px -28px rgba(0, 0, 0, 0.6);
+  --shadow-hover: 0 34px 52px -34px rgba(0, 0, 0, 0.8);
+}

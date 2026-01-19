@@ -1,6 +1,9 @@
 .siteHeader {
   width: min(1250px, 100%);
   margin: 0 auto 48px;
+  position: sticky;
+  top: 10px;
+  z-index: 100;
 }
 
 .siteNav {
@@ -8,7 +11,18 @@
   align-items: center;
   justify-content: space-between;
   gap: 18px;
-  padding: 12px 0;
+  padding: 12px 24px;
+  background: var(--bg-surface-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.3s ease;
+}
+
+.siteNav:hover {
+  box-shadow: var(--shadow-hover);
 }
 
 .brand {
@@ -16,7 +30,7 @@
   align-items: center;
   gap: 12px;
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--text-main);
 }
 
 .brand__logo {
@@ -37,7 +51,7 @@
 
 .brand__eyebrow {
   font-size: 0.95rem;
-  color: var(--muted);
+  color: var(--text-muted);
 }
 
 .navLinks {
@@ -46,13 +60,19 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  align-items: center;
 }
 
 .navLinks a {
   text-decoration: none;
-  color: var(--text-color);
+  color: var(--text-main);
   font-weight: 600;
   position: relative;
+  transition: color 0.2s;
+}
+
+.navLinks a:hover {
+  color: var(--primary);
 }
 
 .navLinks a::after {
@@ -74,13 +94,39 @@
   transform: scaleX(1);
 }
 
+/* Toggle Button Wrappers if any */
 .navCTA {
-  padding-inline: 20px;
+  padding-inline: 0 10px;
+}
+
+#themeToggle {
+  background: transparent;
+  box-shadow: none;
+  color: var(--text-main);
+  min-width: auto;
+  padding: 8px;
+  font-size: 1.5rem;
+  line-height: 1;
+  border: 1px solid transparent;
+}
+
+#themeToggle:hover {
+  background: var(--bg-surface);
+  color: var(--primary);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-sm);
+  border-color: var(--border-color);
+}
+
+#themeToggle:active {
+  transform: scale(0.95);
 }
 
 @media (max-width: 720px) {
   .siteNav {
     flex-direction: column;
+    border-radius: 24px;
+    padding: 20px;
   }
 
   .navLinks {

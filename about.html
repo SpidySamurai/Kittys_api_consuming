@@ -1,63 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="css/header.css" />
-    <link rel="stylesheet" href="css/footer.css" />
-    <title>About · Kittys API</title>
-  </head>
-  <body>
-    <div data-fragment="header.html"></div>
 
-    <main role="main">
-      <section class="about">
-        <div class="about__content">
-          <p class="about__eyebrow">Powered by TheCatAPI</p>
-          <h2>Explore, save, and share cats instantly</h2>
-          <p class="about__copy">
-            A lightweight app built to practice API consumption with fetch, favorites management, and file uploads. Perfect for reviewing fundamentals while showcasing a friendly UI.
-          </p>
-          <div class="about__actions">
-            <a class="about__link" href="./index.html#randomCats">See new cats →</a>
-            <a class="about__link" href="./index.html#upload">Start uploading →</a>
-            <a class="about__link" href="./index.html#favouriteCats">Add to favorites </a>
-          </div>
-          <ul class="about__list">
-            <li>GET / POST / DELETE endpoint consumption</li>
-            <li>Dynamic rendering and button interactions</li>
-            <li>File uploads powered by <code>FormData</code></li>
-          </ul>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/vars.css" />
+  <link rel="stylesheet" href="css/main.css" />
+  <link rel="stylesheet" href="css/components/buttons.css" />
+  <link rel="stylesheet" href="css/components/cards.css" />
+  <link rel="stylesheet" href="css/components/forms.css" />
+  <link rel="stylesheet" href="css/pages/about.css" />
+  <link rel="stylesheet" href="css/header.css" />
+  <link rel="stylesheet" href="css/footer.css" />
+  <title>About · Kittys API</title>
+</head>
+
+<body>
+  <div data-fragment="header.html"></div>
+
+  <main role="main">
+    <section class="about">
+      <div class="about__content">
+        <p class="about__eyebrow">Powered by TheCatAPI</p>
+        <h2>Explore, save, and share cats instantly</h2>
+        <p class="about__copy">
+          A lightweight app built to practice API consumption with fetch, favorites management, and file uploads.
+          Perfect for reviewing fundamentals while showcasing a friendly UI.
+        </p>
+        <div class="about__actions">
+          <a class="about__link" href="./index.html#randomCats">See new cats →</a>
+          <a class="about__link" href="./index.html#upload">Start uploading →</a>
+          <a class="about__link" href="./index.html#favouriteCats">Add to favorites </a>
         </div>
-        <div class="about__panel">
-          <div class="about__stats">
-            <article>
-              <h3>+120</h3>
-              <p>Requests tested</p>
-            </article>
-            <article>
-              <h3>Fetch + Upload</h3>
-              <p>Examples ready</p>
-            </article>
-            <article>
-              <h3>TheCatAPI</h3>
-              <p>Real public API</p>
-            </article>
-          </div>
-          <div class="about__details">
-            <h3>Quick stack</h3>
-            <p>HTML + CSS + Vanilla JS</p>
-            <h3>Goal</h3>
-            <p>Practice API consumption and polish UI</p>
-          </div>
+        <ul class="about__list">
+          <li>GET / POST / DELETE endpoint consumption</li>
+          <li>Dynamic rendering and button interactions</li>
+          <li>File uploads powered by <code>FormData</code></li>
+        </ul>
+      </div>
+      <div class="about__panel">
+        <div class="about__stats">
+          <article>
+            <h3>+120</h3>
+            <p>Requests tested</p>
+          </article>
+          <article>
+            <h3>Fetch + Upload</h3>
+            <p>Examples ready</p>
+          </article>
+          <article>
+            <h3>TheCatAPI</h3>
+            <p>Real public API</p>
+          </article>
         </div>
-      </section>
-    </main>
+        <div class="about__details">
+          <h3>Quick stack</h3>
+          <p>HTML + CSS + Vanilla JS</p>
+          <h3>Goal</h3>
+          <p>Practice API consumption and polish UI</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    <div data-fragment="footer.html"></div>
+  <div data-fragment="footer.html"></div>
 
-    <script src="js/main.js" defer></script>
-  </body>
+  <script src="js/main.js" defer></script>
+</body>
+
 </html>

@@ -1,0 +1,65 @@
+/* Cards Component */
+.card,
+.catCard,
+.about {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: 24px;
+  box-shadow: var(--shadow-lg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Cat Card Specifics */
+.catCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+  width: 100%;
+  height: 100%;
+  padding: 26px 24px 34px;
+  background: linear-gradient(140deg, var(--bg-surface-glass), rgba(255, 255, 255, 0.05));
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.catCard:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-hover);
+}
+
+.catCard__media {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+  background: var(--bg-body); /* Placeholder color during load */
+}
+
+.catCard__media img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.catCard:hover .catCard__media img {
+  transform: scale(1.03);
+}
+
+.catCard button {
+  margin: auto 0 0;
+  width: min(220px, 100%);
+  align-self: center;
+}
+
+/* Section specific - keeping structure, enhancing visuals */
+.randomCats__cards,
+.favouriteCats__cards,
+.uploadedCats__cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 28px;
+  padding-top: 36px;
+}

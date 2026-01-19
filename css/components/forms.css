@@ -1,0 +1,49 @@
+/* Forms & Upload Component */
+.uploadingCats {
+  width: min(760px, 100%);
+  margin: 0 auto;
+  padding: 36px 32px;
+  background: var(--bg-surface-glass);
+  border: 1px solid var(--border-color);
+  border-radius: 28px;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  backdrop-filter: blur(10px);
+}
+
+.uploadingForm {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 100%;
+}
+
+.uploadingForm label {
+  font-weight: 600;
+  color: var(--text-main);
+}
+
+.uploadingForm input[type="file"] {
+  width: 100%;
+  padding: 14px;
+  border-radius: 16px;
+  border: 2px dashed var(--primary);
+  background: rgba(103, 84, 248, 0.03);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+  font-family: var(--font-family);
+}
+
+.uploadingForm input[type="file"]:hover {
+  border-color: var(--primary-dark);
+  background: rgba(103, 84, 248, 0.08);
+}
+
+.uploadingForm button {
+  width: auto;
+  min-width: 200px;
+}

@@ -1,6 +1,13 @@
 .siteFooter {
   text-align: center;
   margin-top: auto;
-  padding-top: 24px;
-  color: var(--muted);
+  padding: 32px 0 48px;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+  background: var(--bg-body);
+}
+
+.siteFooter p {
+  margin: 0;
+  font-size: 0.9rem;
 }

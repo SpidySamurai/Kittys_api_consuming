@@ -48,11 +48,12 @@
       request(`favourites/${favoriteId}`, {
         method: "DELETE",
       }),
-    uploadCatPhoto: (formData) =>
-      request("images/upload", {
-        method: "POST",
-        body: formData,
+    getUploadedCats: () => request(`images/?limit=${RANDOM_LIMIT}`),
+    deleteUploadedCat: (imageId) =>
+      request(`images/${imageId}`, {
+        method: "DELETE",
       }),
+    getBreeds: () => request("breeds"),
   };
 
   const setStatusMessage = (node, message = "") => {
@@ -170,106 +171,258 @@
     const uploadForm = document.getElementById("uploadCatForm");
     const statusNode = document.getElementById("error");
 
-    if (!randomCatsContainer || !favouriteCatsContainer) {
-      return; // Not on the home page.
-    }
-
     const handleError = (message) => setStatusMessage(statusNode, message);
 
-    const loadRandomCats = async () => {
-      setBusyState(randomCatsContainer, true);
-      try {
-        const cats = await CatAPI.getRandomCats();
-        renderCatCards(randomCatsContainer, cats, {
-          actionLabel: "Save in favorites",
-          onAction: async (imageId) => {
-            try {
-              await CatAPI.saveFavoriteCat(imageId);
-              await loadFavouriteCats();
-              handleError("Cat saved to favorites.");
-            } catch (error) {
-              handleError("Unable to save to favorites.");
+    // Only run home page logic if containers exist
+    if (randomCatsContainer && favouriteCatsContainer) {
+      const loadRandomCats = async () => {
+        setBusyState(randomCatsContainer, true);
+        try {
+          const cats = await CatAPI.getRandomCats();
+          renderCatCards(randomCatsContainer, cats, {
+            actionLabel: "Save in favorites",
+            onAction: async (imageId) => {
+              try {
+                await CatAPI.saveFavoriteCat(imageId);
+                await loadFavouriteCats();
+                handleError("Cat saved to favorites.");
+              } catch (error) {
+                handleError("Unable to save to favorites.");
+              }
+            },
+          });
+          handleError("");
+        } catch (error) {
+          handleError("Unable to load random cats. Please try again.");
+        } finally {
+          setBusyState(randomCatsContainer, false);
+        }
+      };
+
+      const loadFavouriteCats = async () => {
+        setBusyState(favouriteCatsContainer, true);
+        try {
+          const cats = await CatAPI.getFavoriteCats();
+          renderCatCards(favouriteCatsContainer, cats, {
+            actionLabel: "Remove from favorites",
+            emptyMessage: "No favorite cats yet.",
+            onAction: async (favoriteId) => {
+              try {
+                await CatAPI.deleteFavoriteCat(favoriteId);
+                await loadFavouriteCats();
+                handleError("Cat removed from favorites.");
+              } catch (error) {
+                handleError("Unable to remove from favorites.");
+              }
+            },
+          });
+        } catch (error) {
+          handleError("Unable to load favorite cats.");
+        } finally {
+          setBusyState(favouriteCatsContainer, false);
+        }
+      };
+
+      const handleRefreshClick = async () => {
+        if (refreshButton) {
+          refreshButton.disabled = true;
+        }
+        await loadRandomCats();
+        if (refreshButton) {
+          refreshButton.disabled = false;
+        }
+      };
+
+      const handleUpload = async (event) => {
+        event.preventDefault();
+        if (!uploadForm) return;
+        const formData = new FormData(uploadForm);
+        const file = formData.get("file");
+        if (!file || !file.size) {
+          handleError("Please choose a photo before uploading.");
+          return;
+        }
+
+        setBusyState(uploadForm, true);
+        try {
+          await CatAPI.uploadCatPhoto(formData);
+          uploadForm.reset();
+          await loadUploadedCats();
+          handleError("Cat uploaded successfully.");
+        } catch (error) {
+          handleError("Unable to upload the cat photo.");
+        } finally {
+          setBusyState(uploadForm, false);
+        }
+      };
+
+      const loadUploadedCats = async () => {
+        const uploadedContainer = document.querySelector(".uploadedCats__cards");
+        if (!uploadedContainer) return;
+
+        setBusyState(uploadedContainer, true);
+        try {
+          const cats = await CatAPI.getUploadedCats();
+          renderCatCards(uploadedContainer, cats, {
+            actionLabel: "Delete Upload",
+            emptyMessage: "You haven't uploaded any cats yet.",
+            onAction: async (id) => {
+              if (!confirm("Are you sure you want to delete this upload?")) return;
+              
+              try {
+                await CatAPI.deleteUploadedCat(id);
+                await loadUploadedCats();
+                handleError("Cat upload deleted.");
+              } catch (error) {
+                console.error(error);
+                handleError("Unable to delete upload.");
+              }
             }
-          },
-        });
-        handleError("");
-      } catch (error) {
-        handleError("Unable to load random cats. Please try again.");
-      } finally {
-        setBusyState(randomCatsContainer, false);
-      }
-    };
+          });
+        } catch (error) {
+          console.error(error);
+          handleError("Unable to load uploaded cats.");
+        } finally {
+          setBusyState(uploadedContainer, false);
+        }
+      };
 
-    const loadFavouriteCats = async () => {
-      setBusyState(favouriteCatsContainer, true);
-      try {
-        const cats = await CatAPI.getFavoriteCats();
-        renderCatCards(favouriteCatsContainer, cats, {
-          actionLabel: "Remove from favorites",
-          emptyMessage: "No favorite cats yet.",
-          onAction: async (favoriteId) => {
-            try {
-              await CatAPI.deleteFavoriteCat(favoriteId);
-              await loadFavouriteCats();
-              handleError("Cat removed from favorites.");
-            } catch (error) {
-              handleError("Unable to remove from favorites.");
-            }
-          },
-        });
-      } catch (error) {
-        handleError("Unable to load favorite cats.");
-      } finally {
-        setBusyState(favouriteCatsContainer, false);
-      }
-    };
-
-    const handleRefreshClick = async () => {
       if (refreshButton) {
-        refreshButton.disabled = true;
+        refreshButton.addEventListener("click", handleRefreshClick);
       }
-      await loadRandomCats();
-      if (refreshButton) {
-        refreshButton.disabled = false;
-      }
-    };
 
-    const handleUpload = async (event) => {
-      event.preventDefault();
-      if (!uploadForm) return;
-      const formData = new FormData(uploadForm);
-      const file = formData.get("file");
-      if (!file || !file.size) {
-        handleError("Please choose a photo before uploading.");
+      if (uploadForm) {
+        uploadForm.addEventListener("submit", handleUpload);
+      }
+
+      loadRandomCats();
+      loadFavouriteCats();
+      loadUploadedCats();
+    }
+  };
+
+  const initializeBreedsApp = async () => {
+    const breedSelector = document.getElementById("breedSelector");
+    const breedContainer = document.getElementById("breedsContainer");
+    
+    if (!breedSelector || !breedContainer) return;
+
+    let breeds = [];
+
+    const updateBreedDetail = (breedId) => {
+      const breed = breeds.find(b => b.id === breedId);
+      const detail = document.getElementById("breedDetail");
+      const placeholder = document.getElementById("breedPlaceholder");
+      const img = document.getElementById("breedImage");
+
+      if (!breed) {
+        detail.hidden = true;
+        placeholder.hidden = false;
         return;
       }
 
-      setBusyState(uploadForm, true);
-      try {
-        await CatAPI.uploadCatPhoto(formData);
-        uploadForm.reset();
-        handleError("Cat uploaded successfully.");
-      } catch (error) {
-        handleError("Unable to upload the cat photo.");
-      } finally {
-        setBusyState(uploadForm, false);
+      placeholder.hidden = true;
+      detail.hidden = false;
+
+      // Update Text
+      document.getElementById("breedName").textContent = breed.name;
+      document.getElementById("breedDescription").textContent = breed.description;
+      document.getElementById("breedOrigin").textContent = `🌍 ${breed.origin}`;
+      document.getElementById("breedLifeSpan").textContent = `❤️ ${breed.life_span} years`;
+      
+      const wikiLink = document.getElementById("wikiLink");
+      if (breed.wikipedia_url) {
+        wikiLink.href = breed.wikipedia_url;
+        wikiLink.hidden = false;
+      } else {
+        wikiLink.hidden = true;
       }
+
+      // Update Image (Use specific breed image if available, else API might need separate call, but breeds endpoint usually has image object)
+      // Note: Breeds list endpoint might include an image object.
+      if (breed.image && breed.image.url) {
+        img.src = breed.image.url;
+      } else {
+        // Fallback or fetch specific image if needed. For now simple check.
+        img.src = "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg"; // Generic fallback just in case
+      }
+
+      // Render Stats
+      const statsContainer = document.getElementById("breedStats");
+      clearNode(statsContainer);
+      
+      const stats = [
+        { label: "Adaptability", value: breed.adaptability },
+        { label: "Affection", value: breed.affection_level },
+        { label: "Child Friendly", value: breed.child_friendly },
+        { label: "Energy Level", value: breed.energy_level },
+        { label: "Intelligence", value: breed.intelligence },
+        { label: "Social", value: breed.social_needs },
+      ];
+
+      stats.forEach(stat => {
+        const row = document.createElement("div");
+        row.className = "statRow";
+        row.innerHTML = `
+          <span class="statLabel">${stat.label}</span>
+          <div class="statBar">
+            <div class="statFill" style="width: ${(stat.value / 5) * 100}%"></div>
+          </div>
+        `;
+        statsContainer.appendChild(row);
+      });
     };
 
-    if (refreshButton) {
-      refreshButton.addEventListener("click", handleRefreshClick);
-    }
+    try {
+      breeds = await CatAPI.getBreeds();
+      
+      breeds.forEach(breed => {
+        const option = document.createElement("option");
+        option.value = breed.id;
+        option.textContent = breed.name;
+        breedSelector.appendChild(option);
+      });
 
-    if (uploadForm) {
-      uploadForm.addEventListener("submit", handleUpload);
-    }
+      breedSelector.addEventListener("change", (e) => {
+        updateBreedDetail(e.target.value);
+      });
 
-    loadRandomCats();
-    loadFavouriteCats();
+    } catch (error) {
+      console.error("Failed to fetch breeds", error);
+    }
   };
 
-  document.addEventListener("DOMContentLoaded", () => {
-    loadFragments();
+  const ThemeManager = {
+    init: () => {
+      const toggle = document.getElementById("themeToggle");
+      const stored = localStorage.getItem("theme");
+      const system = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      const current = stored || system;
+
+      document.documentElement.setAttribute("data-theme", current);
+      ThemeManager.updateButton(toggle, current);
+
+      if (toggle) {
+        toggle.addEventListener("click", () => {
+          const currentTheme = document.documentElement.getAttribute("data-theme");
+          const newTheme = currentTheme === "dark" ? "light" : "dark";
+          document.documentElement.setAttribute("data-theme", newTheme);
+          localStorage.setItem("theme", newTheme);
+          ThemeManager.updateButton(toggle, newTheme);
+        });
+      }
+    },
+    updateButton: (btn, theme) => {
+      if (!btn) return;
+      btn.textContent = theme === "dark" ? "☀️" : "🌙";
+      btn.setAttribute("aria-label", theme === "dark" ? "Switch to Light Mode" : "Switch to Dark Mode");
+    }
+  };
+
+  document.addEventListener("DOMContentLoaded", async () => {
+    await loadFragments();
+    ThemeManager.init();
     initializeCatsApp();
+    initializeBreedsApp();
   });
 })();
